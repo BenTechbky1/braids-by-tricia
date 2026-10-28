@@ -1,38 +1,187 @@
-<nav class="nav" aria-label="Primary">
-  <a href="index.html" class="nav__brand">
-    Braids <span>by Tricia</span>
-  </a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book an Appointment | Braids by Tricia</title>
+  <meta name="description" content="Book a braiding appointment with Tricia in Vic and the Barcelona area. Choose a time online or request a visit on WhatsApp. Typical appointments last about three hours." />
+  <link rel="canonical" href="https://triciasbeautycorner.com/booking.html" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <meta name="theme-color" content="#fbf7f1" />
+  <meta property="og:title" content="Book an Appointment | Braids by Tricia" />
+  <meta property="og:description" content="Choose a time online or request a visit on WhatsApp. Hours are 6:00 AM–6:00 PM, by appointment." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://triciasbeautycorner.com/booking.html" />
+  <meta property="og:site_name" content="Braids by Tricia" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <ul class="nav__list">
-    <li>
-      <a href="index.html" class="nav__link">Home</a>
-    </li>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="index.html" class="nav__brand">Braids <span>by Tricia</span></a>
+      <button class="nav__toggle" aria-expanded="false" aria-controls="primary-menu" aria-label="Open menu">
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+      </button>
+      <ul class="nav__list" id="primary-menu">
+        <li><a href="index.html" class="nav__link">Home</a></li>
+        <li><a href="services.html" class="nav__link">Services</a></li>
+        <li><a href="gallery.html" class="nav__link">Gallery</a></li>
+        <li><a href="about.html" class="nav__link">About</a></li>
+        <li><a href="booking.html" class="nav__link" aria-current="page">Booking</a></li>
+        <li><a href="contact.html" class="nav__link">Contact</a></li>
+        <li class="nav__cta"><a href="booking.html" class="btn btn--primary">Book Now</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <li>
-      <a href="services.html" class="nav__link">Services</a>
-    </li>
+  <main id="main">
+    <section class="hero page-hero">
+      <div class="container">
+        <p class="hero__eyebrow">Booking</p>
+        <h1>Request your appointment</h1>
+        <p style="max-width: 60ch;">
+          Choose a time on the calendar, or send a WhatsApp request. Hours are 6:00 AM–6:00 PM. A typical appointment lasts about three hours.
+        </p>
+      </div>
+    </section>
 
-    <li>
-      <a href="gallery.html" class="nav__link">Gallery</a>
-    </li>
+    <section class="section" style="padding-top:0;">
+      <div class="container booking-layout">
+        <div class="booking-panel">
+          <h2>Book online</h2>
+          <p>The fastest way to pick a date and time is Tricia’s booking calendar.</p>
+          <ul class="booking-meta">
+            <li><strong>Hours:</strong> 6:00 AM–6:00 PM, by appointment</li>
+            <li><strong>Duration:</strong> typically about 3 hours</li>
+            <li><strong>Area:</strong> Vic and the Barcelona area, Spain</li>
+          </ul>
+          <a
+            class="btn btn--primary btn--large"
+            href="https://calendar.app.google/JmNELtpQK6ZBKSRR9"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open booking calendar
+            <span aria-hidden="true">↗</span>
+          </a>
+          <p class="field-hint">The calendar opens in a new tab. Pricing is confirmed when you book.</p>
+        </div>
 
-    <li>
-      <a href="about.html" class="nav__link">About</a>
-    </li>
+        <div class="booking-panel">
+          <h2>Or request on WhatsApp</h2>
+          <p>Prefer to write first? Send the details below and WhatsApp will open with a ready-to-send message.</p>
 
-    <li>
-      <a href="contact.html" class="nav__link">Contact</a>
-    </li>
+          <form id="booking-form" novalidate>
+            <div class="form-grid">
+              <div class="field">
+                <label for="name">Full name</label>
+                <input type="text" id="name" name="name" autocomplete="name" required />
+              </div>
+              <div class="field">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" autocomplete="tel" required />
+              </div>
+              <div class="field">
+                <label for="email">Email <span class="field-hint">(optional)</span></label>
+                <input type="email" id="email" name="email" autocomplete="email" />
+              </div>
+              <div class="field">
+                <label for="service">Service</label>
+                <select id="service" name="service" required>
+                  <option value="">Choose a style</option>
+                  <option value="Knotless Braids">Knotless Braids</option>
+                  <option value="Box Braids">Box Braids</option>
+                  <option value="Cornrows">Cornrows</option>
+                  <option value="Twists">Twists</option>
+                  <option value="Other protective style">Other protective style</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="date">Preferred date</label>
+                <input type="date" id="date" name="date" required />
+              </div>
+              <div class="field">
+                <label for="time">Preferred time <span class="field-hint">(optional)</span></label>
+                <input type="time" id="time" name="time" min="06:00" max="18:00" />
+              </div>
+              <div class="field">
+                <label for="hairLength">Hair length <span class="field-hint">(optional)</span></label>
+                <select id="hairLength" name="hairLength">
+                  <option value="">Not specified</option>
+                  <option value="Short">Short</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Long">Long</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="braidSize">Braid size <span class="field-hint">(optional)</span></label>
+                <select id="braidSize" name="braidSize">
+                  <option value="">Not specified</option>
+                  <option value="Small">Small</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Large">Large</option>
+                </select>
+              </div>
+              <div class="field field--full">
+                <label for="notes">Notes <span class="field-hint">(optional)</span></label>
+                <textarea id="notes" name="notes" rows="4" placeholder="Colour, length, or anything Tricia should know."></textarea>
+              </div>
+            </div>
 
-    <li class="nav__cta">
-      <a
-        class="button button-small nav-book"
-        href="https://calendar.app.google/JmNELtpQK6ZBKSRR9"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Book now <span aria-hidden="true">↗</span>
-      </a>
-    </li>
-  </ul>
-</nav>
+            <div class="checkbox-field">
+              <input type="checkbox" id="confirmRequest" name="confirmRequest" required />
+              <label for="confirmRequest">I understand this is a request, and Tricia will confirm the appointment.</label>
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--large">Send WhatsApp request</button>
+            <p id="booking-status" class="form-status" role="status"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>Braids by Tricia</h4>
+          <p>Protective style. Personal touch.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="booking.html">Book an Appointment</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="contact.html">Get in touch</a></li>
+            <li>Vic and the Barcelona area, Spain</li>
+            <li><a href="https://wa.me/34631653956">WhatsApp +34 631 653 956</a></li>
+            <li><a href="https://www.instagram.com/tr_icia690/" target="_blank" rel="noopener noreferrer">Instagram @tr_icia690</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Braids by Tricia. All rights reserved.</span>
+        <span>By appointment · 6:00 AM–6:00 PM</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

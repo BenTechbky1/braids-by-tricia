@@ -8,14 +8,7 @@
    3. Pre-select a service on the booking page (from a "Book this style" link)
    ========================================================================== */
 
-/* --------------------------------------------------------------------
-   >>> REPLACE THIS <<<
-   Tricia's real WhatsApp number goes here, in international format
-   with no spaces, no "+", no leading zeros. Example for a UK mobile:
-   "447123456789". This is the ONLY place the number needs to be set —
-   every WhatsApp link/button on the site reads from this constant.
-   -------------------------------------------------------------------- */
-const WHATSAPP_NUMBER = "REPLACE_WITH_TRICIA_NUMBER";
+const WHATSAPP_NUMBER = "34631653956";
 
 document.addEventListener("DOMContentLoaded", () => {
   initMobileNav();
@@ -23,11 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
   prefillServiceFromQueryString();
 });
 
-/* ----------------------------------------------------------------------
-   1. MOBILE NAVIGATION TOGGLE
-   Accessible hamburger menu: toggles aria-expanded, opens/closes the
-   list, and closes again after a link is clicked or Escape is pressed.
-   ---------------------------------------------------------------------- */
 function initMobileNav() {
   const toggle = document.querySelector(".nav__toggle");
   const list = document.querySelector(".nav__list");
@@ -38,13 +26,17 @@ function initMobileNav() {
   const closeMenu = () => {
     list.classList.remove("is-open");
     nav.classList.remove("is-open");
+    document.body.classList.remove("nav-locked");
     toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "Open menu");
   };
 
   const openMenu = () => {
     list.classList.add("is-open");
     nav.classList.add("is-open");
+    document.body.classList.add("nav-locked");
     toggle.setAttribute("aria-expanded", "true");
+    toggle.setAttribute("aria-label", "Close menu");
   };
 
   toggle.addEventListener("click", () => {
@@ -52,7 +44,7 @@ function initMobileNav() {
     isOpen ? closeMenu() : openMenu();
   });
 
-  list.querySelectorAll(".nav__link").forEach((link) => {
+  list.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", closeMenu);
   });
 
@@ -61,17 +53,17 @@ function initMobileNav() {
   });
 }
 
-/* ----------------------------------------------------------------------
-   2. BOOKING FORM -> WHATSAPP
-   Builds a pre-filled WhatsApp message from the appointment request
-   form and opens WhatsApp (app on mobile, web.whatsapp.com on desktop)
-   with the message ready to send. No backend required.
-   ---------------------------------------------------------------------- */
 function initBookingForm() {
   const form = document.querySelector("#booking-form");
   if (!form) return;
 
   const status = document.querySelector("#booking-status");
+  const dateField = form.querySelector("#date");
+
+  if (dateField) {
+    const today = new Date().toISOString().split("T")[0];
+    dateField.setAttribute("min", today);
+  }
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -97,32 +89,14 @@ function initBookingForm() {
     if (!data.confirmed) missing.push("confirmation checkbox");
 
     if (missing.length > 0) {
-      showStatus(
-        status,
-        `Please fill in: ${missing.join(", ")}.`,
-        "error"
-      );
-      return;
-    }
-
-    if (WHATSAPP_NUMBER === "REPLACE_WITH_TRICIA_NUMBER") {
-      showStatus(
-        status,
-        "Booking isn't fully connected yet — the site owner still needs to add a WhatsApp number in js/script.js.",
-        "error"
-      );
+      showStatus(status, `Please fill in: ${missing.join(", ")}.`, "error");
       return;
     }
 
     const message = buildWhatsAppMessage(data);
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
-    showStatus(
-      status,
-      "Opening WhatsApp with your appointment request…",
-      "success"
-    );
-
+    showStatus(status, "Opening WhatsApp with your appointment request…", "success");
     window.open(url, "_blank", "noopener");
   });
 }
@@ -137,10 +111,7 @@ function buildWhatsAppMessage(data) {
 
   if (data.email) lines.push(`Email: ${data.email}`);
 
-  lines.push(
-    `Service: ${data.service}`,
-    `Date: ${data.date}`
-  );
+  lines.push(`Service: ${data.service}`, `Date: ${data.date}`);
 
   if (data.time) lines.push(`Time: ${data.time}`);
   if (data.hairLength) lines.push(`Hair length: ${data.hairLength}`);
@@ -157,12 +128,6 @@ function showStatus(el, message, type) {
   el.classList.add("form-status--visible", `form-status--${type}`);
 }
 
-/* ----------------------------------------------------------------------
-   3. PRE-SELECT A SERVICE ON THE BOOKING PAGE
-   "Book this style" buttons on the services page link to
-   booking.html?service=Knotless%20Braids — this picks the matching
-   <option> automatically so the customer doesn't re-type it.
-   ---------------------------------------------------------------------- */
 function prefillServiceFromQueryString() {
   const select = document.querySelector("#service");
   if (!select) return;
